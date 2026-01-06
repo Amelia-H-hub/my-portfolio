@@ -1,0 +1,33 @@
+<header class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div class="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-500 bg-clip-text text-transparent cursor-pointer">
+      <a href="/">Amelia Huang</a>
+    </div>
+
+    <div class="hidden md:flex items-center gap-8">
+      @for (link of navLinks(); track link.path) {
+        <a [href]="link.path" class="text-gray-600 hover:text-blue-500 transition">
+          {{ link.label }}
+        </a>
+      }
+
+      <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition-all shadow-md hover:shadow-lg">
+        Resume
+      </button>
+    </div>
+
+    <div class="flex gap-4">
+      @for (link of socialLinks(); track link.label) {
+        <a [href]="link.url" target="_blank">
+          <fa-icon [icon]="link.icon" class="text-2xl hover:text-black transition-colors cursor-pointer"></fa-icon>
+        </a>
+      }
+    </div>
+    
+    <div class="md:hidden">
+      <button class="text-gray-600 p-2">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+      </button>
+    </div>
+  </nav>
+</header>
