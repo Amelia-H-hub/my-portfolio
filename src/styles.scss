@@ -2,9 +2,27 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary: #3490dc;
+  --variant-dark: ":where(.dark) &";
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+:root {
+  /* light mode */
+  --text-primary: #0f172a; // slate-900
+  --bg-page: #ffffff;
+}
+
+.dark {
+  /* dark mode */
+  --text-primary: #ffffff;
+  --bg-page: #0f172a; // slate-900
+}
+
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color color 0.3s ease;
 }

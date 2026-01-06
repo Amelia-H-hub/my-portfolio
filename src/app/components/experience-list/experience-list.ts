@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, signal, viewChild, effect, afterNextRender } from '@angular/core';
 import { Experience } from './experience.model';
 
 @Component({
@@ -37,4 +37,27 @@ export class ExperienceList {
       ]
     }
   ])
+
+  isVisible = signal(false);
+
+  private container = viewChild<ElementRef>('experienceContainer');
+
+  constructor() {
+    afterNextRender(() => {
+      const element = this.container()?.nativeElement;
+      if (!element) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            this.isVisible.set(true);
+            observer.unobserve(element); // only trigger once, then stop observing
+          }
+        },
+        { threshold: 0.2} // trigger when 20% of the block enters the viewport
+      );
+
+      observer.observe(element);
+    });
+  }
 }
